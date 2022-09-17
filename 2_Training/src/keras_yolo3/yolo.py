@@ -304,7 +304,7 @@ def detect_webcam(yolo):
         if not return_value:
             break
         image = Image.fromarray(frame)
-        out_pred, image = yolo.detect_image(image, show_stats=False)
+        out_pred, image = yolo.detect_image(image, show_stats=True)
         result = np.asarray(image)
         curr_time = timer()
         exec_time = curr_time - prev_time
@@ -327,7 +327,7 @@ def detect_webcam(yolo):
         cv2.namedWindow("Result", cv2.WINDOW_NORMAL)
         cv2.imshow("Result", result)
         cv2.waitKey(1)
-        if cv2.getWindowProperty("Result", cv2.WND_PROP_VISIBLE) < 1:
-            break
+        # if cv2.getWindowProperty("Result", cv2.WND_PROP_VISIBLE) < 1: # comment to allow web cam to run
+        #     break
     vid.release()
     yolo.close_session()
